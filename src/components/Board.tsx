@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { Button, TileStyled, PuzzleContainer, Container } from './Board.style';
-const dimension = 3;
-const size = 160;
-const shuffleMoves = 23;
+import { settings } from './utils';
 
 export type Tile = {
   size: number;
@@ -11,6 +9,7 @@ export type Tile = {
 };
 
 export const Board = () => {
+  const { dimension, size } = settings;
   const [currentPositions, setCurrentPositions] = useState<Tile[]>(
     Array.from({ length: dimension * dimension }).map((_, i) => ({
       left: size * (i % dimension),
@@ -19,7 +18,7 @@ export const Board = () => {
       size: size,
     })),
   );
-  
+
   const moveTile = (i: number) => {
     const positions = [...currentPositions];
     [positions[0], positions[i]] = [positions[i], positions[0]];
