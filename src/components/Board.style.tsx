@@ -12,17 +12,15 @@ export const Button = styled.button`
   cursor: pointer;
 `;
 
-export const TileStyled = styled.button<Tile>`
+export const TileStyled = styled.button<Tile & {index: number}>`
   transition: 200ms ease;
-  width: ${(props) => props.size}px;
-  height: ${(props) => props.size}px;
+  width: ${({ size }) => size}px;
+  height: ${({ size }) => size}px;
   position: absolute;
-  left: ${(props) => props.left}px;
-  top: ${(props) => props.top}px;
-  background: ${(props) =>
-    props.index === 0
-      ? 'none'
-      : 'url("./img/puzzle/fish/' + props.index + '.png") grey'};
+  left: ${({left}) => left}px;
+  top: ${({top}) => top}px;
+  background: ${({index}) =>
+    index === 0 ? 'none' : 'url("./img/puzzle/fish/' + index + '.png") grey'};
   background-size: cover;
   color: #fff;
   border: 1px solid #fff;

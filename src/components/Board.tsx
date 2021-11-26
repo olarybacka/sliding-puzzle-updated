@@ -8,7 +8,6 @@ export type Tile = {
   size: number;
   left: number;
   top: number;
-  index: number;
 };
 
 export const Board = () => {
@@ -16,21 +15,28 @@ export const Board = () => {
     Array.from({ length: dimension * dimension }).map((_, i) => ({
       left: size * (i % dimension),
       top: Math.floor(i / dimension) * size,
-      index: i,
+      id: i,
       size: size,
     })),
   );
+  
+  const moveTile = (i: number) => {
+    const positions = [...currentPositions];
+    [positions[0], positions[i]] = [positions[i], positions[0]];
+    setCurrentPositions(positions);
+  };
 
   return (
     <Container>
       <PuzzleContainer size={size} dimension={dimension}>
-        {currentPositions.map(({ left, top, index }) => (
+        {currentPositions.map(({ left, top }, index) => (
           <TileStyled
             key={index}
             left={left}
             top={top}
             index={index}
             size={size}
+            onClick={() => moveTile(index)}
           />
         ))}
       </PuzzleContainer>
