@@ -6,8 +6,8 @@ export const settings = {
   shuffleMoves: 23,
 };
 
-export const isNextToEmpty = (tile: Tile, empty: Tile) => {
+export const isNextTo = (tile: Tile, targetTile: Tile) => {
   const distance =
-    Math.abs(tile.left - empty.left) + Math.abs(tile.top - empty.top);
+    Math.abs(tile.left - targetTile.left) + Math.abs(tile.top - targetTile.top);
   return distance === settings.size;
 };

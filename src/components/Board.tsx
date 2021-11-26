@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { Button, TileStyled, PuzzleContainer, Container } from './Board.style';
-import { settings } from './utils';
+import { usePositions } from './usePositions';
+import { isNextTo, settings } from './utils';
 
 export type Tile = {
   size: number;
@@ -10,19 +10,12 @@ export type Tile = {
 
 export const Board = () => {
   const { dimension, size } = settings;
-  const [currentPositions, setCurrentPositions] = useState<Tile[]>(
-    Array.from({ length: dimension * dimension }).map((_, i) => ({
-      left: size * (i % dimension),
-      top: Math.floor(i / dimension) * size,
-      id: i,
-      size: size,
-    })),
-  );
+  const { currentPositions, emptyTile, moveTile } = usePositions();
 
-  const moveTile = (i: number) => {
-    const positions = [...currentPositions];
-    [positions[0], positions[i]] = [positions[i], positions[0]];
-    setCurrentPositions(positions);
+  const handleClicked = (i: number) => {
+    if (isNextTo(currentPositions[i], emptyTile)) {
+      moveTile(i);
+    }
   };
 
   return (
@@ -35,7 +28,7 @@ export const Board = () => {
             top={top}
             index={index}
             size={size}
-            onClick={() => moveTile(index)}
+            onClick={() => handleClicked(index)}
           />
         ))}
       </PuzzleContainer>
