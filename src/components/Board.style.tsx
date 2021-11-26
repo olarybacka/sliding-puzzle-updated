@@ -13,7 +13,7 @@ export const Button = styled.button`
 `;
 
 export const TileStyled = styled.button<Tile & {index: number}>`
-  transition: 200ms ease;
+  /* transition: 200ms ease; */
   width: ${({ size }) => size}px;
   height: ${({ size }) => size}px;
   position: absolute;

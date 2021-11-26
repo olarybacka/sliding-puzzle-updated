@@ -13,13 +13,13 @@ export const usePositions = () => {
       size: size,
     })),
   );
-  
+
   const moveTile = (i: number) => {
     const positions = [...currentPositions];
     [positions[0], positions[i]] = [positions[i], positions[0]];
     setCurrentPositions(positions);
   };
 
-  return {currentPositions, moveTile, emptyTile: currentPositions[0]}
+  return {currentPositions, setCurrentPositions, moveTile, emptyTile: currentPositions[0]}
 
 }

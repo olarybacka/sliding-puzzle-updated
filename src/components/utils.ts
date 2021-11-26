@@ -3,7 +3,7 @@ import { Tile } from './Board';
 export const settings = {
   dimension: 3,
   size: 160,
-  shuffleMoves: 23,
+  shuffleMoves: 10,
 };
 
 export const isNextTo = (tile: Tile, targetTile: Tile) => {
